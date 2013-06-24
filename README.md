@@ -42,6 +42,9 @@ _Note:_ Plugin isn't available in Maven central repository yet.
                    </excludes>
 
                    <format/>
+                   <passedArguments>
+                   		<passedArgument/>
+                   	</passedArguments>
                 </configuration>
                 <executions>
                    <execution>
@@ -182,6 +185,18 @@ External file formats (the location of the file is `${project.build.directory}/c
 * Type: _String_
 * Required: _No_
 * Default: _text_
+
+#### passedArguments
+
+Anything passed in here will be repeated on the command-line call to csslint. E.g.
+
+    <passedArguments>
+    	<passedArgument>quiet</passedArgument>
+    </passedArguments>
+    
+is equivalent to:
+
+    csslint-rhino.js --quiet
 
 #### Additional information
 

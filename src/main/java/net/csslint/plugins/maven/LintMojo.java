@@ -135,6 +135,12 @@ public class LintMojo extends AbstractMojo {
     private List<String> warnings;
 
     /**
+     * @parameter
+     * @optional
+     */
+    private List<String> passedArguments;
+
+    /**
      * The directory to scan.
      * <p/>
      * The directory used by 'includes' and 'excludes' options.
@@ -207,6 +213,7 @@ public class LintMojo extends AbstractMojo {
         addScriptArgument(arguments);
         addErrorsAndWarningsArguments(arguments);
         addFormatArgument(arguments);
+        addPassedArgument(arguments);
         addFilesArguments(arguments);
 
         // Invoke script with specified arguments by means Rhino
@@ -274,6 +281,16 @@ public class LintMojo extends AbstractMojo {
         }
 
         throw new MojoExecutionException("Unknown output format");
+    }
+
+    private void addPassedArgument(List<String> arguments) {
+        assert arguments != null;
+
+        if(passedArguments != null) {
+            for (String passedArgument : passedArguments) {
+                arguments.add("--" + passedArgument);
+            }
+        }
     }
 
     private void addErrorsAndWarningsArguments(List<String> arguments) {
